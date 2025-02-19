@@ -27,9 +27,6 @@
       </CacheManager>
       <hashTree/>
       <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Proxy">
-        <stringProp name="HTTPSampler.proxyScheme">http</stringProp>
-        <stringProp name="HTTPSampler.proxyHost">proxy-txn.austin.hpicorp.net</stringProp>
-        <intProp name="HTTPSampler.proxyPort">8080</intProp>
         <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
           <collectionProp name="Arguments.arguments"/>
         </elementProp>
@@ -97,7 +94,7 @@
         </collectionProp>
       </Arguments>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -108,7 +105,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for PROD Env">
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for PROD Env" enabled="true">
           <stringProp name="IfController.condition">//${__groovy(vars.get(&quot;Environment&quot;) == &quot;Dev&quot;)}
 ${__groovy(props.get(&quot;Environment&quot;) == &quot;PROD&quot;)}
 //&quot;${Environment}&quot;==&quot;Dev&quot;</stringProp>
@@ -116,7 +113,7 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;PROD&quot;)}
           <boolProp name="IfController.useExpression">false</boolProp>
         </IfController>
         <hashTree>
-          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller">
+          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller" enabled="true">
             <elementProp name="ParameterizedController" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="Environment" elementType="Argument">
@@ -143,7 +140,7 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;PROD&quot;)}
             </elementProp>
           </kg.apc.jmeter.control.ParameterizedController>
           <hashTree>
-            <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="Module Controller">
+            <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="Module Controller" enabled="true">
               <collectionProp name="ModuleController.node_path">
                 <stringProp name="764597751">Test Plan</stringProp>
                 <stringProp name="1436790407">Sanity_Test - Test Plan</stringProp>
@@ -162,7 +159,7 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;PROD&quot;)}
           </JSR223Sampler>
           <hashTree/>
         </hashTree>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for QA Env">
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for QA Env" enabled="true">
           <stringProp name="IfController.condition">//${__groovy(vars.get(&quot;Environment&quot;) == &quot;Dev&quot;)}
 ${__groovy(props.get(&quot;Environment&quot;) == &quot;QA&quot;)}
 //&quot;${Environment}&quot;==&quot;Dev&quot;</stringProp>
@@ -170,61 +167,7 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;QA&quot;)}
           <boolProp name="IfController.useExpression">false</boolProp>
         </IfController>
         <hashTree>
-          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller">
-            <elementProp name="ParameterizedController" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="Environment" elementType="Argument">
-                  <stringProp name="Argument.name">Environment</stringProp>
-                  <stringProp name="Argument.value">DEV</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                </elementProp>
-                <elementProp name="name" elementType="Argument">
-                  <stringProp name="Argument.name">name</stringProp>
-                  <stringProp name="Argument.value">Arvind</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                </elementProp>
-                <elementProp name="job" elementType="Argument">
-                  <stringProp name="Argument.name">job</stringProp>
-                  <stringProp name="Argument.value">Developer</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                </elementProp>
-                <elementProp name="Report" elementType="Argument">
-                  <stringProp name="Argument.name">Report</stringProp>
-                  <stringProp name="Argument.value">Dev_Regression_${__timeShift(MM-dd-yyyy-HHmmss,,,,)}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-          </kg.apc.jmeter.control.ParameterizedController>
-          <hashTree>
-            <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="Module Controller">
-              <collectionProp name="ModuleController.node_path">
-                <stringProp name="764597751">Test Plan</stringProp>
-                <stringProp name="1436790407">Sanity_Test - Test Plan</stringProp>
-                <stringProp name="1744065236">All_Test_Cases</stringProp>
-                <stringProp name="-2079589835">Test Cases</stringProp>
-              </collectionProp>
-            </ModuleController>
-            <hashTree/>
-          </hashTree>
-          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler" enabled="true">
-            <stringProp name="cacheKey">true</stringProp>
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <stringProp name="script">log.info(&quot;Environment Property Value: &quot; + props.get(&quot;Environment&quot;))</stringProp>
-            <stringProp name="scriptLanguage">groovy</stringProp>
-          </JSR223Sampler>
-          <hashTree/>
-        </hashTree>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for DEV Env">
-          <stringProp name="IfController.condition">//${__groovy(vars.get(&quot;Environment&quot;) == &quot;Dev&quot;)}
-${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
-//&quot;${Environment}&quot;==&quot;Dev&quot;</stringProp>
-          <boolProp name="IfController.evaluateAll">false</boolProp>
-          <boolProp name="IfController.useExpression">false</boolProp>
-        </IfController>
-        <hashTree>
-          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller">
+          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller" enabled="true">
             <elementProp name="ParameterizedController" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="Environment" elementType="Argument">
@@ -261,7 +204,61 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
             </ModuleController>
             <hashTree/>
           </hashTree>
-          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler">
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">log.info(&quot;Environment Property Value: &quot; + props.get(&quot;Environment&quot;))</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for DEV Env" enabled="true">
+          <stringProp name="IfController.condition">//${__groovy(vars.get(&quot;Environment&quot;) == &quot;Dev&quot;)}
+${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
+//&quot;${Environment}&quot;==&quot;Dev&quot;</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">false</boolProp>
+        </IfController>
+        <hashTree>
+          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller" enabled="true">
+            <elementProp name="ParameterizedController" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="Environment" elementType="Argument">
+                  <stringProp name="Argument.name">Environment</stringProp>
+                  <stringProp name="Argument.value">DEV</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="name" elementType="Argument">
+                  <stringProp name="Argument.name">name</stringProp>
+                  <stringProp name="Argument.value">Arvind</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="job" elementType="Argument">
+                  <stringProp name="Argument.name">job</stringProp>
+                  <stringProp name="Argument.value">Developer</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="Report" elementType="Argument">
+                  <stringProp name="Argument.name">Report</stringProp>
+                  <stringProp name="Argument.value">Dev_Regression_${__timeShift(MM-dd-yyyy-HHmmss,,,,)}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+          </kg.apc.jmeter.control.ParameterizedController>
+          <hashTree>
+            <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="Module Controller" enabled="true">
+              <collectionProp name="ModuleController.node_path">
+                <stringProp name="764597751">Test Plan</stringProp>
+                <stringProp name="1436790407">Sanity_Test - Test Plan</stringProp>
+                <stringProp name="1744065236">All_Test_Cases</stringProp>
+                <stringProp name="-2079589835">Test Cases</stringProp>
+              </collectionProp>
+            </ModuleController>
+            <hashTree/>
+          </hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 Sampler" enabled="true">
             <stringProp name="cacheKey">true</stringProp>
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
@@ -288,11 +285,11 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Test Cases"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Test Cases" enabled="true"/>
         <hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="GET_Calls"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="GET_Calls ${Environment}"/>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TC01_GET_HTTP Request">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TC01_GET_HTTP Request_${Environment}">
               <stringProp name="TestPlan.comments">https://reqres.in/api/users/2</stringProp>
               <stringProp name="HTTPSampler.domain">${base_url}</stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
@@ -306,36 +303,7 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify Response Code" enabled="true">
-                <collectionProp name="Asserion.test_strings">
-                  <stringProp name="49586">200</stringProp>
-                </collectionProp>
-                <stringProp name="Assertion.custom_message"></stringProp>
-                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-                <boolProp name="Assertion.assume_success">false</boolProp>
-                <intProp name="Assertion.test_type">16</intProp>
-              </ResponseAssertion>
-              <hashTree/>
-              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
-                <stringProp name="ConstantTimer.delay">500</stringProp>
-              </ConstantTimer>
-              <hashTree/>
-            </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TC01_GET_HTTP Request">
-              <stringProp name="TestPlan.comments">http://reqres.in/api/users/2</stringProp>
-              <stringProp name="HTTPSampler.domain">reqres.in</stringProp>
-              <stringProp name="HTTPSampler.protocol">https</stringProp>
-              <stringProp name="HTTPSampler.path">api/users/2</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <stringProp name="HTTPSampler.method">GET</stringProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-                <collectionProp name="Arguments.arguments"/>
-              </elementProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify Response Code" enabled="true">
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Verify Response Code">
                 <collectionProp name="Asserion.test_strings">
                   <stringProp name="49586">200</stringProp>
                 </collectionProp>
@@ -353,7 +321,7 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
           </hashTree>
           <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Post_Calls"/>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TC02_POST_HTTP Request">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TC02_POST_HTTP Request_${Environment}">
               <stringProp name="HTTPSampler.domain">${base_url}</stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
               <stringProp name="HTTPSampler.path">/${api_version}/users</stringProp>
@@ -411,9 +379,9 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="PUT_Calls"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="PUT_Calls" enabled="true"/>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TC03_PUT_HTTP Request">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TC03_PUT_HTTP Request_${Environment}">
               <stringProp name="HTTPSampler.domain">${base_url}</stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
               <stringProp name="HTTPSampler.path">/${api_version}/users/2</stringProp>
@@ -471,9 +439,9 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
               <hashTree/>
             </hashTree>
           </hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Patch_Calls"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Patch_Calls" enabled="true"/>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TC04_Patch_HTTP Request">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TC04_Patch_HTTP Request_${Environment}">
               <stringProp name="HTTPSampler.domain">${base_url}</stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
               <stringProp name="HTTPSampler.path">/${api_version}/users/2</stringProp>
@@ -533,7 +501,7 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
           </hashTree>
           <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Delete_Calls"/>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TC05_DELETE_HTTP Request">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TC05_DELETE_HTTP Request_${Environment}">
               <stringProp name="HTTPSampler.domain">${base_url}</stringProp>
               <stringProp name="HTTPSampler.protocol">https</stringProp>
               <stringProp name="HTTPSampler.path">/${api_version}/users/2</stringProp>
