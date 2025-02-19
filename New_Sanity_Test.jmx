@@ -16,6 +16,10 @@
             <stringProp name="Header.name">x-hptm-transaction-id</stringProp>
             <stringProp name="Header.value">${__groovy(return(&quot;JMeter_TxnID_${__time(DDMMYYYY_HHmmssSSS,)}&quot;);,jmeterhptm_tid)}</stringProp>
           </elementProp>
+          <elementProp name="Content-Type" elementType="Header">
+            <stringProp name="Header.name">Content-Type</stringProp>
+            <stringProp name="Header.value">application/json</stringProp>
+          </elementProp>
         </collectionProp>
         <stringProp name="TestPlan.comments">JMeter_TxnID_${__time(DDMMYYYY_HHmmssSSS,)}</stringProp>
       </HeaderManager>
@@ -91,10 +95,15 @@
             <stringProp name="Argument.value">api</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="Report" elementType="Argument">
+            <stringProp name="Argument.name">Report</stringProp>
+            <stringProp name="Argument.value">Regression_${__timeShift(MM-dd-yyyy-HHmmss,,,,)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
         </collectionProp>
       </Arguments>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -113,7 +122,7 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;PROD&quot;)}
           <boolProp name="IfController.useExpression">false</boolProp>
         </IfController>
         <hashTree>
-          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller" enabled="true">
+          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller">
             <elementProp name="ParameterizedController" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="Environment" elementType="Argument">
@@ -213,7 +222,7 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;QA&quot;)}
           </JSR223Sampler>
           <hashTree/>
         </hashTree>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for DEV Env" enabled="true">
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for DEV Env">
           <stringProp name="IfController.condition">//${__groovy(vars.get(&quot;Environment&quot;) == &quot;Dev&quot;)}
 ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
 //&quot;${Environment}&quot;==&quot;Dev&quot;</stringProp>
@@ -221,7 +230,7 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
           <boolProp name="IfController.useExpression">false</boolProp>
         </IfController>
         <hashTree>
-          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller" enabled="true">
+          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller">
             <elementProp name="ParameterizedController" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="Environment" elementType="Argument">
@@ -287,7 +296,7 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
       <hashTree>
         <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Test Cases" enabled="true"/>
         <hashTree>
-          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="GET_Calls ${Environment}"/>
+          <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="GET_Calls"/>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TC01_GET_HTTP Request_${Environment}">
               <stringProp name="TestPlan.comments">https://reqres.in/api/users/2</stringProp>
@@ -313,7 +322,7 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
                 <intProp name="Assertion.test_type">16</intProp>
               </ResponseAssertion>
               <hashTree/>
-              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer">
                 <stringProp name="ConstantTimer.delay">500</stringProp>
               </ConstantTimer>
               <hashTree/>
@@ -569,7 +578,8 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">${CONFIG_PATH}/TestResults/${Sanity_Report}.csv</stringProp>
+        <stringProp name="filename">${Base_Dir_Path}/TestResults/${Environment}_${Report}.csv</stringProp>
+        <stringProp name="TestPlan.comments">${Base_Dir_Path}/TestResults/${Report}.csv</stringProp>
       </ResultCollector>
       <hashTree/>
     </hashTree>
