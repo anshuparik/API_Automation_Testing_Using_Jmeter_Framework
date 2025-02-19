@@ -103,7 +103,7 @@
         </collectionProp>
       </Arguments>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Master Controller">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -115,14 +115,12 @@
       </ThreadGroup>
       <hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for PROD Env">
-          <stringProp name="IfController.condition">//${__groovy(vars.get(&quot;Environment&quot;) == &quot;Dev&quot;)}
-${__groovy(props.get(&quot;Environment&quot;) == &quot;PROD&quot;)}
-//&quot;${Environment}&quot;==&quot;Dev&quot;</stringProp>
+          <stringProp name="IfController.condition">${__groovy(props.get(&quot;Environment&quot;) == &quot;PROD&quot;)}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">false</boolProp>
         </IfController>
         <hashTree>
-          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller">
+          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="User Defined Variables for PROD Env">
             <elementProp name="ParameterizedController" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="Environment" elementType="Argument">
@@ -163,15 +161,14 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;PROD&quot;)}
           </JSR223Sampler>
           <hashTree/>
         </hashTree>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for QA Env" enabled="true">
-          <stringProp name="IfController.condition">//${__groovy(vars.get(&quot;Environment&quot;) == &quot;Dev&quot;)}
-${__groovy(props.get(&quot;Environment&quot;) == &quot;QA&quot;)}
-//&quot;${Environment}&quot;==&quot;Dev&quot;</stringProp>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for QA Env">
+          <stringProp name="IfController.condition">${__groovy(props.get(&quot;Environment&quot;) == &quot;QA&quot;)}
+</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">false</boolProp>
         </IfController>
         <hashTree>
-          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller">
+          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="User Defined Variables for QA Env">
             <elementProp name="ParameterizedController" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="Environment" elementType="Argument">
@@ -213,14 +210,12 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;QA&quot;)}
           <hashTree/>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for DEV Env">
-          <stringProp name="IfController.condition">//${__groovy(vars.get(&quot;Environment&quot;) == &quot;Dev&quot;)}
-${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
-//&quot;${Environment}&quot;==&quot;Dev&quot;</stringProp>
+          <stringProp name="IfController.condition">${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">false</boolProp>
         </IfController>
         <hashTree>
-          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller">
+          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="User Defined Variables for DEV Env">
             <elementProp name="ParameterizedController" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="Environment" elementType="Argument">
@@ -269,6 +264,7 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
         <hashTree/>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="All_Test_Cases" enabled="false">
+        <stringProp name="TestPlan.comments">Don&apos;t Enable this Thread Group</stringProp>
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
