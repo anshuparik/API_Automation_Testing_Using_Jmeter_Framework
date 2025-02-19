@@ -12,16 +12,11 @@
     <hashTree>
       <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager ">
         <collectionProp name="HeaderManager.headers">
-          <elementProp name="" elementType="Header">
-            <stringProp name="Header.name">x-hptm-transaction-id</stringProp>
-            <stringProp name="Header.value">${__groovy(return(&quot;JMeter_TxnID_${__time(DDMMYYYY_HHmmssSSS,)}&quot;);,jmeterhptm_tid)}</stringProp>
-          </elementProp>
           <elementProp name="Content-Type" elementType="Header">
             <stringProp name="Header.name">Content-Type</stringProp>
             <stringProp name="Header.value">application/json</stringProp>
           </elementProp>
         </collectionProp>
-        <stringProp name="TestPlan.comments">JMeter_TxnID_${__time(DDMMYYYY_HHmmssSSS,)}</stringProp>
       </HeaderManager>
       <hashTree/>
       <CacheManager guiclass="CacheManagerGui" testclass="CacheManager" testname="HTTP Cache Manager">
@@ -59,7 +54,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="Environment" elementType="Argument">
             <stringProp name="Argument.name">Environment</stringProp>
-            <stringProp name="Argument.value">${__setProperty(Environment,PROD,)}</stringProp>
+            <stringProp name="Argument.value">${__setProperty(Environment,DEV,)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
             <stringProp name="Argument.desc">jmeter -JEnvironment=DEV    (QA,PROD)</stringProp>
           </elementProp>
@@ -97,7 +92,7 @@
           </elementProp>
           <elementProp name="Report" elementType="Argument">
             <stringProp name="Argument.name">Report</stringProp>
-            <stringProp name="Argument.value">Regression_${__timeShift(MM-dd-yyyy-HHmmss,,,,)}</stringProp>
+            <stringProp name="Argument.value">Sanity_${__timeShift(MM-dd-yyyy-HHmmss,,,,)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
