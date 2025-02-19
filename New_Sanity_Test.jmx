@@ -59,7 +59,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="Environment" elementType="Argument">
             <stringProp name="Argument.name">Environment</stringProp>
-            <stringProp name="Argument.value">${__setProperty(Environment,DEV,)}</stringProp>
+            <stringProp name="Argument.value">${__setProperty(Environment,PROD,)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
             <stringProp name="Argument.desc">jmeter -JEnvironment=DEV    (QA,PROD)</stringProp>
           </elementProp>
@@ -114,7 +114,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for PROD Env" enabled="true">
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for PROD Env">
           <stringProp name="IfController.condition">//${__groovy(vars.get(&quot;Environment&quot;) == &quot;Dev&quot;)}
 ${__groovy(props.get(&quot;Environment&quot;) == &quot;PROD&quot;)}
 //&quot;${Environment}&quot;==&quot;Dev&quot;</stringProp>
@@ -140,16 +140,11 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;PROD&quot;)}
                   <stringProp name="Argument.value">Devops</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
-                <elementProp name="Report" elementType="Argument">
-                  <stringProp name="Argument.name">Report</stringProp>
-                  <stringProp name="Argument.value">Prod_Regression_${__timeShift(MM-dd-yyyy-HHmmss,,,,)}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                </elementProp>
               </collectionProp>
             </elementProp>
           </kg.apc.jmeter.control.ParameterizedController>
           <hashTree>
-            <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="Module Controller" enabled="true">
+            <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="Module Controller">
               <collectionProp name="ModuleController.node_path">
                 <stringProp name="764597751">Test Plan</stringProp>
                 <stringProp name="1436790407">Sanity_Test - Test Plan</stringProp>
@@ -176,34 +171,29 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;QA&quot;)}
           <boolProp name="IfController.useExpression">false</boolProp>
         </IfController>
         <hashTree>
-          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller" enabled="true">
+          <kg.apc.jmeter.control.ParameterizedController guiclass="kg.apc.jmeter.control.ParameterizedControllerGui" testclass="kg.apc.jmeter.control.ParameterizedController" testname="jp@gc - Parameterized Controller">
             <elementProp name="ParameterizedController" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="Environment" elementType="Argument">
                   <stringProp name="Argument.name">Environment</stringProp>
-                  <stringProp name="Argument.value">DEV</stringProp>
+                  <stringProp name="Argument.value">QA</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
                 <elementProp name="name" elementType="Argument">
                   <stringProp name="Argument.name">name</stringProp>
-                  <stringProp name="Argument.value">Arvind</stringProp>
+                  <stringProp name="Argument.value">PAREEK</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
                 <elementProp name="job" elementType="Argument">
                   <stringProp name="Argument.name">job</stringProp>
-                  <stringProp name="Argument.value">Developer</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                </elementProp>
-                <elementProp name="Report" elementType="Argument">
-                  <stringProp name="Argument.name">Report</stringProp>
-                  <stringProp name="Argument.value">Dev_Regression_${__timeShift(MM-dd-yyyy-HHmmss,,,,)}</stringProp>
+                  <stringProp name="Argument.value">Qa</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
           </kg.apc.jmeter.control.ParameterizedController>
           <hashTree>
-            <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="Module Controller" enabled="true">
+            <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="Module Controller">
               <collectionProp name="ModuleController.node_path">
                 <stringProp name="764597751">Test Plan</stringProp>
                 <stringProp name="1436790407">Sanity_Test - Test Plan</stringProp>
@@ -246,11 +236,6 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
                 <elementProp name="job" elementType="Argument">
                   <stringProp name="Argument.name">job</stringProp>
                   <stringProp name="Argument.value">Developer</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                </elementProp>
-                <elementProp name="Report" elementType="Argument">
-                  <stringProp name="Argument.name">Report</stringProp>
-                  <stringProp name="Argument.value">Dev_Regression_${__timeShift(MM-dd-yyyy-HHmmss,,,,)}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -579,7 +564,7 @@ ${__groovy(props.get(&quot;Environment&quot;) == &quot;DEV&quot;)}
           </value>
         </objProp>
         <stringProp name="filename">${Base_Dir_Path}/TestResults/${Environment}_${Report}.csv</stringProp>
-        <stringProp name="TestPlan.comments">${Base_Dir_Path}/TestResults/${Report}.csv</stringProp>
+        <stringProp name="TestPlan.comments">Check reports in test result folder</stringProp>
       </ResultCollector>
       <hashTree/>
     </hashTree>
