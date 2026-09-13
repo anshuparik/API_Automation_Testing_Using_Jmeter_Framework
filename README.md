@@ -1,6 +1,6 @@
 # API Functional Testing Using JMeter — Educational Framework
 
-> **🎓 For education purposes only.** This project is a learning resource and template that shows **how to use Apache JMeter for functional API testing** — not a production load/performance runner.
+> **For education purposes only.** This project is a learning resource and template that shows **how to use Apache JMeter for functional API testing** — not a production load/performance runner.
 
 This repository demonstrates how to build a **functional API testing framework** using [Apache JMeter](https://jmeter.apache.org/). It walks through the core patterns you need for real-world API test automation:
 
@@ -32,26 +32,26 @@ The included test plan (a sanity suite against the public [ReqRes](https://reqre
 
 ## Features
 
-- ✅ **Functional API testing** — validates real API behavior (correct response for a given request), not just load
-- 🔁 **Environment-aware execution** — same test suite runs on `DEV`, `QA`, or `PROD` with per-environment data
-- 🧪 **Full REST lifecycle coverage** — `GET`, `POST`, `PUT`, `PATCH`, `DELETE`
-- 🔍 **Response assertions** — checks both response **codes** and response **body content**
-- 🗂️ **Modular test organization** — test cases grouped by HTTP method, reusable via `Module Controller`
-- 🐳 **Dockerized runner** — JMeter + Plugins Manager bundled in an image for one-command execution
-- 📊 **Per-environment reports** — timestamped result files that persist outside the container
-- 🔌 **Auto plugin installation** — `entrypoint.sh` installs any missing JMeter plugins at runtime
+- **Functional API testing** — validates real API behavior (correct response for a given request), not just load
+- **Environment-aware execution** — same test suite runs on `DEV`, `QA`, or `PROD` with per-environment data
+- **Full REST lifecycle coverage** — `GET`, `POST`, `PUT`, `PATCH`, `DELETE`
+- **Response assertions** — checks both response **codes** and response **body content**
+- **Modular test organization** — test cases grouped by HTTP method, reusable via `Module Controller`
+- **Dockerized runner** — JMeter + Plugins Manager bundled in an image for one-command execution
+- **Per-environment reports** — timestamped result files that persist outside the container
+- **Auto plugin installation** — `entrypoint.sh` installs any missing JMeter plugins at runtime
 
 ---
 
 ## Included Test Plan (Sanity Example)
 
-| Test Case | Method | Endpoint        | Validations                                      |
-| --------- | ------ | --------------- | ------------------------------------------------ |
-| TC01      | GET    | `/api/users/2`  | Response code = `200`                            |
+| Test Case | Method | Endpoint        | Validations                                       |
+| --------- | ------ | --------------- | ------------------------------------------------- |
+| TC01      | GET    | `/api/users/2`  | Response code = `200`                             |
 | TC02      | POST   | `/api/users`    | Response code = `201`, body contains `name`/`job` |
 | TC03      | PUT    | `/api/users/2`  | Response code = `200`, body contains `name`/`job` |
 | TC04      | PATCH  | `/api/users/2`  | Response code = `200`, body contains `name`/`job` |
-| TC05      | DELETE | `/api/users/2`  | Response code = `204`                            |
+| TC05      | DELETE | `/api/users/2`  | Response code = `204`                             |
 
 > Use the same pattern to add **hundreds** of functional cases — checklists, authentication flows, error scenarios, boundary values — each grouped under its controller.
 
@@ -61,7 +61,7 @@ The included test plan (a sanity suite against the public [ReqRes](https://reqre
 
 ```
 .
-├── New_Sanity_Test.jmx       # JMeter test plan — the framework/methodology example
+├── API_Functional_Testing.jmx # JMeter test plan — the framework/methodology example
 ├── Dockerfile                # Container image: OpenJDK 11 + JMeter 5.4.1 + plugins
 ├── entrypoint.sh             # Installs required plugins, then runs JMeter non-GUI
 ├── .gitattributes            # LF line-ending normalization
@@ -135,7 +135,7 @@ Test Plan: Sanity_Test - Test Plan
 ### 1. GUI Mode (best for learning)
 
 ```bash
-jmeter -t New_Sanity_Test.jmx
+jmeter -t API_Functional_Testing.jmx
 ```
 
 Select the environment in **User Defined Variables - Set Env value_DEV,QA,PROD** (or pass it as a property), then hit **Start**. Watch requests and assertion results live in **View Results Tree** — this is how you inspect both the request and response for each functional case.
@@ -145,9 +145,9 @@ Select the environment in **User Defined Variables - Set Env value_DEV,QA,PROD**
 Pick the environment with the `Environment` property — `DEV`, `QA`, or `PROD`:
 
 ```bash
-jmeter -n -t New_Sanity_Test.jmx -JEnvironment=DEV
-jmeter -n -t New_Sanity_Test.jmx -JEnvironment=QA
-jmeter -n -t New_Sanity_Test.jmx -JEnvironment=PROD
+jmeter -n -t API_Functional_Testing.jmx -JEnvironment=DEV
+jmeter -n -t API_Functional_Testing.jmx -JEnvironment=QA
+jmeter -n -t API_Functional_Testing.jmx -JEnvironment=PROD
 ```
 
 Results are written automatically to:
@@ -168,7 +168,7 @@ Run the tests:
 
 ```bash
 docker run --rm \
-  -e JMX_FILE=/opt/jmeter/New_Sanity_Test.jmx \
+  -e JMX_FILE=/opt/jmeter/API_Functional_Testing.jmx \
   -e RESULTS_FILE=/opt/jmeter/results/result.jtl \
   -v "$(pwd)":/opt/jmeter/results \
   jmeter-api-framework
@@ -186,14 +186,14 @@ docker run --rm \
 
 ## Key Variables
 
-| Variable        | Default              | Description                                      |
-| --------------- | -------------------- | ------------------------------------------------ |
-| `Environment`   | `DEV`                | Target environment: `DEV`, `QA`, or `PROD`        |
-| `base_url`      | `reqres.in`          | Base domain of the API under test                |
-| `api_version`   | `api`                | API version path segment                         |
-| `timeDelay`     | `5000`               | Delay between iterations                         |
-| `Base_Dir_Path` | (auto)               | Base directory used to resolve the results path  |
-| `Report`        | `Sanity_<timestamp>` | Report name suffix                               |
+| Variable        | Default              | Description                                     |
+| --------------- | -------------------- | ----------------------------------------------- |
+| `Environment`   | `DEV`                | Target environment: `DEV`, `QA`, or `PROD`       |
+| `base_url`      | `reqres.in`          | Base domain of the API under test               |
+| `api_version`   | `api`                | API version path segment                        |
+| `timeDelay`     | `5000`               | Delay between iterations                        |
+| `Base_Dir_Path` | (auto)               | Base directory used to resolve the results path |
+| `Report`        | `Sanity_<timestamp>` | Report name suffix                              |
 
 ---
 
@@ -212,11 +212,11 @@ docker run --rm \
 
 The `TestResults/` folder contains committed sample executions for each environment:
 
-| File                                 | Environment |
-| ------------------------------------ | ----------- |
-| `DEV_Sanity_02-19-2025-165804.csv`   | DEV         |
-| `QA_Sanity_02-19-2025-165749.csv`    | QA          |
-| `PROD_Sanity_02-19-2025-165731.csv`  | PROD        |
+| File                                | Environment |
+| ----------------------------------- | ----------- |
+| `DEV_Sanity_02-19-2025-165804.csv`  | DEV         |
+| `QA_Sanity_02-19-2025-165749.csv`   | QA          |
+| `PROD_Sanity_02-19-2025-165731.csv` | PROD        |
 
 Each file captures full request/response detail (headers, assertions, timings) in JMeter's JTL format.
 
