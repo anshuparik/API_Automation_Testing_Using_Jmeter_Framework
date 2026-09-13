@@ -122,11 +122,41 @@ Test Plan: Sanity_Test - Test Plan
 
 - [Java 8+](https://www.oracle.com/java/technologies/downloads/) (`JAVA_HOME` set)
 - [Apache JMeter 5.x](https://jmeter.apache.org/download_jmeter.cgi) (`JMETER_HOME/bin` on `PATH`)
-- [JMeter Plugins Manager](https://jmeter-plugins.org/wiki/PluginsManager/) — required for the `ParameterizedController`
+- [JMeter Plugins Manager](https://jmeter-plugins.org/wiki/PluginsManager/) — required to install the plugin below
 
 **With Docker:**
 
 - [Docker](https://www.docker.com/products/docker-desktop/)
+
+---
+
+## Required JMeter Plugins
+
+This framework uses the [**Parameterized Controller**](https://jmeter-plugins.org/wiki/ParameterizedController/) plugin (`kg.apc.jmeter.control.ParameterizedController`, ID `jpgc-prmctl`). It lets each environment block inject its own variable values before invoking the shared test suite. Everything else in the JMX uses built-in JMeter elements.
+
+> If you see an error while installing/opening the JMX (e.g. `CannotResolveClassException: kg.apc.jmeter.control.ParameterizedController` or a "Plugin not found" dialog), install this plugin and retry.
+
+### Install via Plugins Manager (GUI)
+
+1. Put the [Plugins Manager JAR](https://jmeter-plugins.org/downloads/all/) into `JMETER_HOME/lib/ext`
+2. Restart JMeter and go to **Options → Plugins Manager**
+3. Open the **Available Plugins** tab, search for **Parameterized Controller**, tick it, and click **Apply Changes and Restart JMeter**
+
+### Install via command line (non-GUI)
+
+```bash
+# Option A — install everything the JMX needs
+"$JMETER_HOME/bin/PluginsManagerCMD.sh" install-for-jmx API_Functional_Testing.jmx
+
+# Option B — install the specific plugin
+"$JMETER_HOME/bin/PluginsManagerCMD.sh" install jpgc-prmctl
+```
+
+On Windows use `PluginsManagerCMD.bat` instead of `PluginsManagerCMD.sh`.
+
+### Docker — no manual installation needed
+
+The [Dockerfile](Dockerfile) installs all plugins at build time (`install-all-except`), and [entrypoint.sh](entrypoint.sh) detects and installs any plugin still missing for the JMX at runtime, so the plugin list is handled automatically in containers.
 
 ---
 
